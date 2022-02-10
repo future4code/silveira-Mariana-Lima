@@ -1,0 +1,10 @@
+1 - Lasanha
+2 - Pizza
+3 - Coxinha
+4 - Escondidinho de Charque
+5 - Uva
+6 - Pipoca
+7 - Canja
+8 - Sopa de Macaxeira 
+9 - Cuscuz com Ovo 
+10 - Pastel
