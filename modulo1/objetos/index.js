@@ -8,25 +8,20 @@
 
 // Exercício de interpretação
 // 1-a)
-
-/*const pessoa = {
-    nome: 'Mariana',
-    apelidos: ['Mari', 'Nana','Coisinha']
+/*
+const pessoa = {
+    nome:"Mariana",
+    apelidos:["Mari", "Nana","Coisinha"]
 }
 
-console.log(`Eu sou ${pessoa.nome}, mas pode me chamar de ${pessoa.apelidos}.`)
-*/
-
-// 1-b)
-
-/*const pessoa = {
-    nome: 'Mariana',
-    apelidos: ['Mari', 'Nana','Coisinha']
+function imprimir(objeto){
+return `Eu sou ${objeto.nome}, mas pode me chamar de ${objeto.apelidos} .`
 }
-novosApelidos = ["Marianinha", "Naninha", "BB"]
-console.log(`Eu sou ${pessoa.nome}, mas pode me chamar de ${novosApelidos}.`)
-*/
 
+const novoApelido = {...pessoa,apelidos:['Marianinha', 'Nananinha','BB']}
+
+console.log(imprimir(novoApelido))
+*/
 //2-a)
 
 /*const pessoa1 = {
