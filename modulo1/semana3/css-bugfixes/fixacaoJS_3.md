@@ -1,4 +1,4 @@
-function calculaNota(ex, p1, p2) {
+ˋˋˋfunction calculaNota(ex, p1, p2) {
   // Escreva seu código aqui
   const peso1 = ex
   const peso2 = p1 * 2
@@ -13,4 +13,4 @@ function calculaNota(ex, p1, p2) {
   } else {
     return "D"
   }
-}
+}ˋˋˋ
