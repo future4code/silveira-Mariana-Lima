@@ -5,8 +5,8 @@
   **/
 
 * {
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
 }
 
 h2 {
@@ -43,8 +43,7 @@ div img {
     height: 40px;
     border-radius: 5px;
     font-size: 20px;
-    color: white;
-}
+    color: white;}
 
 .botao-amarelo:hover {
     background-color: #c44f00;
@@ -69,6 +68,7 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
+    padding-top: 50px;
 }
 
 #container-de-descricao>ol {
