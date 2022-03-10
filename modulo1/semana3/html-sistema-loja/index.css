@@ -1,5 +1,9 @@
 h1 {
-background-color: rgb(238, 235, 235) ;
+background-color: red ;
+padding: 40px;
+width: 1000px ;
+margin:unset;
+border: 1000px;
 }
 
 .rede-social{
