@@ -72,7 +72,7 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
-    padding-top: 50px;
+    margin: 20;
 }
 
 #container-de-descricao>ol {
