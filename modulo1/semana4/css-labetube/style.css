@@ -23,7 +23,7 @@ header{
    width: 100px;
    display: flex;
    flex-direction: column;
-   margin: 0 px;
+   margin: 0;
    display: grid;
    grid-template-columns: repeat(5, 1fr);
    row-gap: 10px;
@@ -67,3 +67,11 @@ footer{
     display: flex;
     align-self: center;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+   main{
+       display: grid;
+       grid-template-columns: 1fr;
+     }
+    }
+    
