@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-componets';
+import styled from 'styled-components';
 
 export const BigCardContainer = styled.div`
     display: flex;
@@ -29,12 +29,11 @@ export const Texto = styled.div `
 function CardGrande(props) {
     return (
         <BigCardContainer>
-            <ImagemGrande>src={ props.imagem }
+            <ImagemGrande src={ props.imagem }/>
             <Texto>
                 <Titulo>{ props.nome } </Titulo>
                 <p>{ props.descricao } </p>
             </Texto>
-            </ImagemGrande>
         </BigCardContainer>
     )
 }
