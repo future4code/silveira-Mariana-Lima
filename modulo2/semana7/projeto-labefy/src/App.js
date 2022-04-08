@@ -1,48 +1,41 @@
-import React from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import CriarPlaylist from './componets/CreatePlaylist';
-import { createGlobalStyle } from 'styled-components';
-import ListaPlaylist from './componets/getAllPlaylists';
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-`
+import React from "react";
+import axios from "axios";
+import CriarLista from "./components/Criarlista";
+import VerLista from "./components/VerLista";
+//import styled from "styled-components";
 
 export default class App extends React.Component {
   state = {
-    telaAtual: "criandoplaylist"
-  }
+    mudarTela: "criarlista"
+  };
 
-  escolheTela = () => {
-    switch (this.state.telaAtual) {
-      case "criandoplaylist":
-        return <CriarPlaylist irParaLista={this.irParaLista} />
-        case "listaMusicas":
-        return <ListaPlaylist irParaCriar={this.irParaCriar} />
+  selectPage = () => {
+    switch (this.state.mudarTela) {
+      case "criarlista":
+        return <CriarLista />;
+      case "verlista":
+        return <VerLista />;
+
       default:
-        return <div>Erro! Página não encontrada</div> 
+        return <CriarLista />;
     }
-  }
+  };
 
-  irParaCriar = () => {
-    this.setState({ telaAtual: "criarPlaylist" })
-  }
-
-  irParaLista = () => {
-    this.setState({ telaAtual: "listaMusicas" })
-  }
+  mudarDeTela = (nomeDaTela) => {
+    this.setState({ mudarTela: nomeDaTela });
+  };
 
   render() {
     return (
-      <div>
-        <GlobalStyle/>
-        {this.escolheTela()}
+      <div className="App">
+        <button onClick={() => this.mudarDeTela("criarlista")}>
+          Criar Playlist
+        </button>
+        <button onClick={() => this.mudarDeTela("verlista")}>
+          Ver Playlist
+        </button>
+        {this.selectPage()}
       </div>
-    )
+    );
   }
 }
