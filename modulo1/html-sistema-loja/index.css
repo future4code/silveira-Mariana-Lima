@@ -1,0 +1,35 @@
+h1 {
+background-color: rgb(238, 235, 235) ;
+}
+
+.rede-social{
+    width: 30px;
+}
+
+#primeira-imagem {
+    width: 200px;
+}
+
+#segunda-imagem {
+    width: 150px;
+}
+
+#terceira-imagem{
+    width: 150px;
+}
+
+#quarta-imagem {
+    width: 200px;
+}
+
+#quinta-imagem {
+    width: 90px;
+}
+
+.titulo{
+    background-color:gray;
+}
+
+.funcionarios{
+    background-color: burlywood;
+}
