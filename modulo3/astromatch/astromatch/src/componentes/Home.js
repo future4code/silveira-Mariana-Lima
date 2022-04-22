@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import App from "../App";
@@ -62,9 +61,9 @@ export default function Match(props) {
                 console.log(erro.message);
             })
     }
-    const postChoosePerson = () => {
+    const postChoosePerson = (choice) => {
         axios
-            .post('https://us-central1-missao-newton.cloudfunctions.net/astroMatch/:mariana/choose-person')
+            .post('https://us-central1-missao-newton.cloudfunctions.net/astroMatch/:mariana/choose-person', {id: id, choice: choice})
             .then(() => {
                 getProfile()
             }).catch((erro) => {
@@ -95,4 +94,4 @@ export default function Match(props) {
             </div>
         </>
     )
-}
+} 
