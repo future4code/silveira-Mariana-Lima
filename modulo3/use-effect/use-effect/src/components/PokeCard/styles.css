@@ -1,0 +1,22 @@
+.container{
+    margin: 10px 600px;
+    border: 3px solid red;
+    background-color: black;
+    color: red;
+}
+
+.negrito{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.img{
+    border: 3px solid;
+    background-color: yellow;
+}
+
+.cardName{
+    border: 1px solid red;
+    margin: 4px 23px;
+    background-color: yellow;
+}
