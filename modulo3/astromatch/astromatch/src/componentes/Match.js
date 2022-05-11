@@ -67,7 +67,7 @@ export default function Home(props) {
             <CardPessoa>
                 {listaDeMatch.map((pessoa) => {
                     return <Descrição>
-                       <Image> <img src={pessoa.photo} /> </Image>
+                       <Image src={pessoa.photo} />
                         <p>{pessoa.name}</p>
                     </Descrição>
                 })}
