@@ -1,10 +1,8 @@
 import React from "react";
-import Routes from "./route/Routes";
+import Router from "./routes/Router"
 
-function App() {
+export default function App() {
   return (
-    <Routes/>
+    <Router/>
   );
 }
-
-export default App;
