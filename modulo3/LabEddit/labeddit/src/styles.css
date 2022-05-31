@@ -1,0 +1,17 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  background-: #d9b570;
+}
+
+body {
+  background: #d9b570;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0px 0px;
+  height: 100vh;
+}
+
+.imagem {
+  width: 20px;
+}
