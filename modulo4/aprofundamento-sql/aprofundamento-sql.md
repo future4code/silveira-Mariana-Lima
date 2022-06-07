@@ -32,6 +32,8 @@ c) ```UPDATE Actor ```
 ``` gender = "male" ```
 ``` WHERE di = "005"; ```
 
+d) Validou o codigo, mas não alterou nenhum linha no codigo.
+
 ## Exercício 3
 
 a) ``` DELETE FROM Actor WHERE name =  " Fernanda Montenegro"; ```
