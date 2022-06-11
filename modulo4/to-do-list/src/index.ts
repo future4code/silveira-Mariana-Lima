@@ -21,6 +21,8 @@ const app: Express = express();
 app.use(express.json());
 app.use(cors());
 
+/// 1 - Criar usuário
+
 app.post("/user", async (req: Request, res: Response) => {
     let erroCode = 400
 
@@ -50,6 +52,8 @@ app.post("/user", async (req: Request, res: Response) => {
     }
 })
 
+/// 2 - Pega usuário pelo id
+
 app.get("/user/:id", async (req: Request, res: Response) => {
     let erroCode = 400
 
@@ -74,6 +78,8 @@ app.get("/user/:id", async (req: Request, res: Response) => {
         res.status(erroCode).send(error.sqlMessage || error.message)
     }
 })
+
+/// 3 - Edita usuário
 
 app.put("/user/edit/:id",async (req: Request, res: Response) =>{
     let erroCode = 400
@@ -105,6 +111,8 @@ app.put("/user/edit/:id",async (req: Request, res: Response) =>{
         res.status(erroCode).send(error.sqMessage || error.message)
     }
 })
+
+/// 4 - Criar tarefa
 
 app.post("/task", async (req: Request, res: Response) => {
     let erroCode = 400
@@ -143,6 +151,8 @@ app.post("/task", async (req: Request, res: Response) => {
     }
 })
 
+/// 5 - Pegar tarefa pelo id 
+
 app.get("/task/:id", async (req: Request, res: Response) => {
     let erroCode = 400
     // const {limit_date} = req.body
@@ -156,12 +166,16 @@ app.get("/task/:id", async (req: Request, res: Response) => {
         const result = await connection("TodoListTask")
         .select("*")
         .where({id: req.params.id})
+
         res.status(201).send(result[0])
 
     } catch(erro: any){
         res.status(erroCode).send(erro.sqlMessage || erro.massage)
     }
 })
+
+
+/// 6 - Pegar todos os usuários 
 
 app.get("/users/all", async(req: Request, res: Response) => {
     let erroCode = 400
@@ -177,17 +191,151 @@ app.get("/users/all", async(req: Request, res: Response) => {
     }
 })
 
+/// 7 - Pegar tarefas criadas por um usário - NÃO FUNCIONA
+
 app.get("/task", async(req: Request, res: Response) => {
     let erroCode = 400
+    const id = req.query.id  as string;
 
     try {
         const result = await connection("TodoListTask")
-        .select("*")
+        .join("TodoListUser", "TodoListUser.id", "TodoListTask.creator_user_id")
+        .select("TodoListUser.*","TodoListUser.nickname")
+        .where({creator_user_id: id})
 
-        res.status(200).send(result)
+        res.status(200).send(result[0])
 
     } catch (error:any) {
         res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+/// 8 - Pesquisar usuário 
+
+app.get("/user", async(req: Request, res: Response) => {
+    let erroCode = 400
+
+    try {
+
+        const result = await connection("TodoListUser")
+        .select("TodoListUser.id", "TodoListUser.nickname")
+        .where({"TodoListUser.nickname": req.query.nickname})
+
+
+        res.send(result[0])
+
+    } catch (error:any) {
+        res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+/// 9 - Atribuir um usuário responsável a uma tarefa
+/// 10 -Pegar usuários responsáveis por uma tarefa
+/// 11. Pegar tarefa pelo id e os responsáveis por ela
+
+
+/// 12. Atualizar o status da tarefa pelo id
+
+app.put("/task/status/:id", async(req: Request, res: Response) => {
+    let erroCode = 400
+
+    try {
+        if(!req.body.status) {
+            erroCode = 404
+            throw new Error("The status input is empty")
+        }  else if (!req.params.id) {
+            erroCode = 404
+            throw new Error("The id is invalid")
+        }
+
+        await connection ("TodoListTask")
+        .update({status: req.body.status})
+        .where({id: req.params.id})
+
+        res.send("Task succefully updated")
+
+    } catch (error:any) {
+        res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+/// 13. Pegar todas as tarefas por status - NÃO FUNCIONA
+
+app.get("/task/:status", async(req: Request, res: Response) => {
+    let erroCode = 400
+
+    try {
+        if(!req.params.status) {
+            erroCode = 404
+            throw new Error("The status input is empty")
+        }
+
+        const result = await connection("TodoListTask")
+        .select("*")
+        .where({status: req.params.status})
+
+        res.status(200).send(result[0])
+
+    }catch (error:any) {
+        res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+/// 14. Pegar todas as tarefas atrasadas - NÃO FUNCIONA
+
+app.get("/task/delayed", async(req: Request, res: Response) => {
+    let erroCode = 400
+
+    try {
+        if(!req.params.status) {
+            erroCode = 404
+            throw new Error("The status input is empty")
+        }
+
+        const result = await connection("TodoListTask")
+        .select("*")
+        .where({status: "to_do"})
+
+        res.status(200).send(result[0])
+
+    }catch (error:any) {
+        res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+
+/// 15. Retirar um usuário responsável de uma tarefa
+/// 16. Atribuir mais de um responsável a uma tarefa
+/// 17. Procurar tarefa por termos 
+/// 18. Atualizar o status de várias tarefas
+
+/// 19. Deletar tarefa
+
+app.delete("/task/:id", async(req:Request, res: Response) => {
+    let erroCode = 400
+    
+    try{
+        await connection("TodoListTask")
+        .delete()
+        .where({id: req.params.id})
+
+        res.status(200).send("Task deleted")
+    } catch (error:any) {
+        res.status(erroCode).send(error.sqlMessage || error.message)
+    }
+})
+
+/// 20. Deletar usuário - Se tiver "Task" para aquele "User", não vai conseguir excluir o usuário
+
+app.delete("/user/:id", async(req: Request, res: Response): Promise<any> => {
+    try {
+        await connection("TodoListUser")
+        .delete()
+        .where({id: req.params.id})
+
+        res.send("User deleted")
+    } catch (error:any) {
+        res.status(400).send(error.sqlMessage || error.message)
     }
 })
 
