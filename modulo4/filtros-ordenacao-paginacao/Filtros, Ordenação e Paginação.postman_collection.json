@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "d932a2ae-5225-4bec-a264-a59b1bcbde95",
+		"name": "Filtros, Ordenação e Paginação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20351771"
+	},
+	"item": [
+		{
+			"name": "getUserName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/recipes?name=amanda",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"recipes"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "amanda"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/recipes/:type",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"recipes",
+						":type"
+					],
+					"variable": [
+						{
+							"key": "type",
+							"value": "cx"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNameType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/employee?type=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"employee"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFiveUser",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
