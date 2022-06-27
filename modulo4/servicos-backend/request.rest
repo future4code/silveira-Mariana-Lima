@@ -1,0 +1,6 @@
+GET https://viacep.com.br/ws/51300140/json/ 
+content-type: application/json
+
+##
+
+POST https://localhost:3000/users
