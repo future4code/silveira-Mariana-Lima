@@ -1,0 +1,15 @@
+
+GET http://localhost:3003/user?name=amanda
+Content-Type: application/json
+
+GET http://localhost:3003/users/type/:type
+Content-Type: application/json
+
+GET http://localhost:3003/users/order?type=cx
+Content-Type: application/json
+
+GET http://localhost:3003/users/five?page=4
+Content-Type: application/json
+
+GET http://localhost:3003/allfuncs?type=teacher&page=2
+Content-Type: application/json
