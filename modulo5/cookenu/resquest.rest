@@ -16,3 +16,10 @@ Content-Type: application/json
     "email": "mariana@dev.com",
     "password": "1234567"
 }
+
+###
+
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBhYWJkZWU4LTAxNjItNGE4Yy1iNDdmLTkyMWY2YWUxMzQ0NyIsImlhdCI6MTY1NjU5MDk2NCwiZXhwIjoxNjU2NTk0NTY0fQ.kzLDqLlK79748UqtHk08R1UPZhFo2OgjEyyFSPTDOSk""

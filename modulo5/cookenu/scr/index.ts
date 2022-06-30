@@ -1,3 +1,4 @@
+import { getProfile } from './endpoints/getProfile';
 import { login } from './endpoints/login';
 import { singUp } from './endpoints/singUp';
 import { app } from "./app";
@@ -12,3 +13,5 @@ app.post("/singup", singUp)
 app.post("/login", login)
 
 //Pegar próprio perfil
+
+app.get("/user/profile", getProfile)
