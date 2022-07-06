@@ -3,13 +3,17 @@ import { Post, User } from "../types/Types";
 
 export class UserDatabase extends BaseDatabase {
     insertUser = async(user: User) => {
-        await this.connection("Labook_users")
+        try{
+             await this.connection("Labook_users")
         .insert({
             id: user.id,
             name: user.name,
             email: user.email,
             password: user.password
         })
+        } catch(error:any){
+            throw new Error(error.sqlMessage || error.message)
+        }
     };
 
     selectUserbyEmail = async(email: string) => {
@@ -28,6 +32,17 @@ export class UserDatabase extends BaseDatabase {
         }
     };
 
+    getUserById = async(id:string) => {
+        try{
+          const result = await this.connection("Labook_users")
+            .select("*")
+            .where({id})
+            return result[0]
+        }catch(error:any){
+            throw new Error(error.sqlMessage || error.message)
+        }        
+    }
+
     insertPost = async(post: Post) => {
         await this.connection("Labook_posts")
         .insert({
@@ -35,8 +50,8 @@ export class UserDatabase extends BaseDatabase {
             photo: post.photo,
             description: post.description,
             type: post.type,
-            createAt: post.createAt,
-            authorId: post.authorId
+            create_at: post.created_at,
+            author_id: post.author_id
         })
     };
 
@@ -67,5 +82,5 @@ export class UserDatabase extends BaseDatabase {
         }catch (error:any){
             throw new Error("Error in get post")
         }
-    }
+    };
 }

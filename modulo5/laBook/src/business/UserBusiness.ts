@@ -18,6 +18,12 @@ export class UserBussines {
         if(!name || !email || !password){
             throw new Error("Incorrect input. Verify the inputs")
         }
+        if (email.indexOf("@") === -1) {
+            throw new Error("Invalid Email!")
+        }
+        if (password.length < 6) {
+            throw new Error("Password must have at least 6 characters!")
+        }
 
         const id = idGenerator.generateId()
         const cypherPassword = await hashManager.createHash(password)

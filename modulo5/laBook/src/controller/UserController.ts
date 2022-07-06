@@ -9,7 +9,7 @@ export class UserController {
             const {name, email, password} = req.body
             const response = await userBussines.signup(name, email, password)
             res.status(201).send("Created User")
-        }catch(error:any){
+        }catch(error:any){console.log(error)
             res.status(400).send(error.sqlMessage || error.message)
         }
     }

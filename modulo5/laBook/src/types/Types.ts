@@ -19,6 +19,6 @@ export type Post = {
     photo: string,
     description: string,
     type: POST_TYPES,
-    createAt: Date,
-    authorId: string
+    created_at: Date,
+    author_id: string
 }

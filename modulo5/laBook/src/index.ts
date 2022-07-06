@@ -8,4 +8,4 @@ const postController = new PostController
 app.post("/user/signup", userController.signup)
 app.post("/user/login", userController.login)
 app.post("/post", postController.createPost)
-app.get("/post/:id", postController.getPost)
+app.get("/post/:id", postController.SelectPost)
