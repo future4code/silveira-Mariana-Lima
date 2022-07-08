@@ -20,7 +20,7 @@ export class PostController {
             const id = idGenerator.generateId()
 
             if (!data) {
-                throw new Error("Make sure you are logged in before post something!")
+                throw new Error("You need to be logged in to post")
             }
 
             const newPost:Post = {
@@ -48,11 +48,11 @@ export class PostController {
             const user = userDatabase.getUserById(token.id)
 
             if (!user) {
-                throw new Error("Make sure you are logged in before search posts!")
+                throw new Error("You need to be logged in to post!")
             }
 
             if (!postId) {
-                throw new Error("Please, enter the id of the post you want to search!")
+                throw new Error("Incorrect ID")
             }
 
             const post = await postDatabase.getPostById(postId)

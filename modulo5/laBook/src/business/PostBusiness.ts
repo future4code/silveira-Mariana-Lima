@@ -1,19 +1,15 @@
-import { UserDatabase } from '../data/UserDatabase';
-import { HashManager } from '../services/HashManager';
 import { Post} from '../types/Types';
 import { IdGenerator } from './../services/IdGenerator';
 import { PostDataBase } from '../data/PostDatabase';
 
 const idGenerator = new IdGenerator()
-const hashManager = new HashManager()
-const userDatabase = new UserDatabase()
-const postDatabase = new PostDataBase()
+
 
 export class PostBussines {
     async createPost( post: Post) {
         try {
             if (!post.photo || !post.description || !post.type || !post.created_at) {
-                throw new Error("Please, fill all the fiels!")
+                throw new Error("Incorrect input. Verify the inputs")
             }
 
             const id = idGenerator.generateId()

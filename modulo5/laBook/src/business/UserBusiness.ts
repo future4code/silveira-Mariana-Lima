@@ -1,4 +1,3 @@
-import { AuthenticationData } from './../types/Types';
 import { UserDatabase } from '../data/UserDatabase';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from './../services/IdGenerator';
