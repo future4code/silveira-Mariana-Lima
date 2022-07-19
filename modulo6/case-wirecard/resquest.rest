@@ -4,8 +4,31 @@ POST  http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "Mariana",
-    "email": "mariana@dev.com",
+    "name": "Maria",
+    "email": "maria@dev.com",
     "password": "123456789",
-    "cpf": "12345678910"
+    "cpf": "12345678911"
+}
+
+### LOGIN
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "maria@dev.com",
+    "password": "123456789"
+}
+
+### CREATE CARD
+
+POST http://localhost:3003/card/createCard
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ODNjYmE4LWFmODgtNGJkYy1iMmQ3LTk5MGI5MjM4MmU5NCIsImlhdCI6MTY1ODI1MjA4NCwiZXhwIjoxNjU4MjU1Njg0fQ.KbzRtdO5BAyHtj3oPPTVRpOh36QiPIyDRkhKJiIhOpE
+Content-Type: application/json
+
+{
+    "number": "1234 5678 9012 3456", 
+    "name": "Mariana",
+    "expiration": "2030/12/12", 
+    "cvv": "123"
 }

@@ -1,4 +1,4 @@
-export type CreditCard = {
+export type Card = {
     id: string,
     number: string,
     name: string,
