@@ -8,6 +8,7 @@ export class CardDatabase extends BaseDatabse {
         .insert({
             id: card.id,
             number: card.number,
+            name: card.name,
             expiration: card.expiration,
             cvv: card.cvv,
             user_id: card.user_id
