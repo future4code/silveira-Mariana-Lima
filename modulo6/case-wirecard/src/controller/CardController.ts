@@ -4,7 +4,7 @@ import { CardBussiness } from "../bussiness/CardBussiness";
 
 const cardBussiness = new CardBussiness()
 
-export class CradController {
+export class CardController {
     insertCard = async (req: Request, res: Response) => {
         try {
             const { number, name, expiration, cvv } = req.body
