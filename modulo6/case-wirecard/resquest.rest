@@ -1,13 +1,13 @@
-### CADASTRO
+### SIGNUP
 
 POST  http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "Maria",
-    "email": "maria@dev.com",
+    "name": "Mayara",
+    "email": "mayara@dev.com",
     "password": "123456789",
-    "cpf": "12345678911"
+    "cpf": "12345678912"
 }
 
 ### LOGIN
@@ -23,12 +23,39 @@ Content-Type: application/json
 ### CREATE CARD
 
 POST http://localhost:3003/card/createCard
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ODNjYmE4LWFmODgtNGJkYy1iMmQ3LTk5MGI5MjM4MmU5NCIsImlhdCI6MTY1ODI1MjA4NCwiZXhwIjoxNjU4MjU1Njg0fQ.KbzRtdO5BAyHtj3oPPTVRpOh36QiPIyDRkhKJiIhOpE
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkMWI1ZjhkLTI3YTgtNDE0YS1iOWY3LTVkZWE1ODQ2Y2JmOCIsImlhdCI6MTY1ODQxMDg2NywiZXhwIjoxNjU4NDE0NDY3fQ._VPM11Jqca34dIZNQ4CGBrzvAUJU3b9px8mp8FgTo8Y
 Content-Type: application/json
 
 {
-    "number": "1234 5678 9012 3456", 
-    "name": "Mariana",
-    "expiration": "2030/12/12", 
-    "cvv": "123"
+    "number": "1234 5678 9012 7890", 
+    "name": "Mayara",
+    "expiration": "2025/12/12", 
+    "cvv": "456"
 }
+
+### PAYMENT CARD
+
+POST http://localhost:3003/payment/creditPayment
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ODNjYmE4LWFmODgtNGJkYy1iMmQ3LTk5MGI5MjM4MmU5NCIsImlhdCI6MTY1ODQxMTE3NCwiZXhwIjoxNjU4NDE0Nzc0fQ.GKi0RlGVIB_Fpl2rhyT_DhRSP1aOCakC3O82Qz8dYFg
+Content-Type: application/json
+
+{
+    "amount": 20000,
+    "credit_card": "37da293d-5878-4768-89d7-93bc1de13dde"
+}
+
+### PAYMENT TICKET
+
+POST http://localhost:3003/payment/ticketPayment
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkMWI1ZjhkLTI3YTgtNDE0YS1iOWY3LTVkZWE1ODQ2Y2JmOCIsImlhdCI6MTY1ODQxMDg2NywiZXhwIjoxNjU4NDE0NDY3fQ._VPM11Jqca34dIZNQ4CGBrzvAUJU3b9px8mp8FgTo8Y
+Content-Type: application/json
+
+{
+    "amount": 400
+}
+
+### GET PAYMENT
+
+GET  http://localhost:3003/users/payment
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ODNjYmE4LWFmODgtNGJkYy1iMmQ3LTk5MGI5MjM4MmU5NCIsImlhdCI6MTY1ODQxMTE3NCwiZXhwIjoxNjU4NDE0Nzc0fQ.GKi0RlGVIB_Fpl2rhyT_DhRSP1aOCakC3O82Qz8dYFg
+Content-Type: application/json

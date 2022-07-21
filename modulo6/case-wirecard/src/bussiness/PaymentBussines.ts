@@ -25,7 +25,7 @@ export class PaymentBussiness {
 
         const id = idGenerator.generateId()
         const userId = authenticator.getTokenData(token)
-        const card = await cardDatabase.getCardByNumber(credit_card)
+        const card = await cardDatabase.getCardById(credit_card)
 
         if(!card){
             throw new Error("Incorrect card")

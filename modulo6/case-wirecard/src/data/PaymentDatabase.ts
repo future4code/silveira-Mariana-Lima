@@ -9,7 +9,8 @@ export class PaymentDatabase extends BaseDatabse {
         .insert({
             id: payment.id,
             amount: payment.amount,
-            payment: payment.credit_card,
+            payment: payment.payment,
+            credit_card: payment.credit_card,
             payment_situation: "Paid",
             user_id: payment.user_id
         })
@@ -21,9 +22,9 @@ export class PaymentDatabase extends BaseDatabse {
             id: payment.id,
             amount: payment.amount,
             payment: payment.payment,
-            payment_situation: "Waitong payment",
+            payment_situation: "Waiting payment",
             id_ticket: payment.id_tickert,
-            user_id: payment.user_id 
+            user_id: payment.user_id
         })
     }
 

@@ -15,10 +15,10 @@ export class CardDatabase extends BaseDatabse {
         })
     }
 
-    getCardByNumber = async(number: string) => {
+    getCardById = async(id: string) => {
     const result = await this.connection("card_wirecard")
     .select("*")
-    .where({number: number})
+    .where({id: id})
     return {
         id: result[0].id,
         name: result[0].name,
