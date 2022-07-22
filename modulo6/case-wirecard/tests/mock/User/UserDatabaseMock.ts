@@ -1,7 +1,6 @@
 import { User } from "../../../src/models/User";
 import { userMock } from "./UserMock";
 
-
 export class UserDatabaseMock {
     public async insertUser(user: User): Promise<void> {
 
