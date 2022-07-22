@@ -1,51 +1,47 @@
 import { User } from "../models/User";
-import { BaseDatabse } from "../data/BaseDatabase";
+import BaseDatabase from "./BaseDatabase";
 
-export class UserDatabase extends BaseDatabse {
-    insertUser = async(user: User) => {
-        await this.connection("user_wirecard")
-        .insert({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            cpf: user.cpf,
-            password: user.password
-        })
+
+export class UserDatabase extends BaseDatabase {
+
+    protected tableName: string = "user_wirecard";
+
+    private toModel(dbModel?: any): User | undefined {
+        return (
+            dbModel &&
+            new User(
+               dbModel.id,
+               dbModel.name,
+               dbModel.email,
+               dbModel.cpf,
+               dbModel.password,
+            ));
+    };
+
+   public async insertUser(user: User): Promise<void> {
+    try{
+        await BaseDatabase.connection.raw(`
+            INSERT INTO ${this.tableName} (id, name, email, cpf, password)
+            VALUES (
+            '${user.getId()}', 
+            '${user.getName()}', 
+            '${user.getEmail()}',
+            '${user.getCpf()}',
+            '${user.getPassword()}'
+            )`)
+    } catch (error: any) {
+        throw new Error(error.sqlMessage || error.message)
+      }
     }
 
-    selectUserByEmail = async(email: string) => {
+    public async selectUserByEmail(email: string):Promise<User | undefined> {
         try{
-            const result = await this.connection("user_wirecard")
-            .select("*")
-            .where({email: email})
-
-            return{
-                id: result[0].id,
-                name: result[0].name,
-                email: result[0].email,
-                cpf: result[0].cpf,
-                password: result[0].password
-            }
+            const result = await BaseDatabase.connection.raw(`
+                SELECT * from ${this.tableName} WHERE email = '${email}'
+            `);
+            return this.toModel(result[0][0])
         } catch(error: any){
-            throw new Error(error.message)
-        }
-    }
-
-    selectUserById = async(id: string) => {
-        try {
-            const result = await this.connection("user_wirecard")
-            .select("*")
-            .where({id:id})
-
-            return {
-                id: result[0].id,
-                name: result[0].name,
-                email: result[0].email,
-                cpf: result[0].cpf,
-                password: result[0].password
-            }
-        }catch(error: any){
-            throw new Error(error.message)
+            throw new Error(error.sqlMessage || error.message)
         }
     }
 }

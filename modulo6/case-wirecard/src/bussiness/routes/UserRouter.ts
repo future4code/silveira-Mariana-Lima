@@ -10,4 +10,4 @@ const paymentController = new PaymentController()
 userRouter.post("/signup", userController.signup);
 userRouter.post("/login", userController.login);
 
-userRouter.get("/payment", paymentController.getPayment)
+userRouter.get("/payment", paymentController.getPaymentUserId)

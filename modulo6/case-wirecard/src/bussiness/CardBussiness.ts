@@ -1,50 +1,66 @@
+import { Card } from './../models/Card';
 import { CardDatabase } from './../data/CardDatabase';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator} from './../services/IdGenerator';
 import { Authenticator } from '../services/Authenticator';
-import { UserDatabase } from '../data/UserDatabase';
-
-
-const idGenerator = new IdGenerator()
-const hashManager = new HashManager()
-const cardDatabase = new CardDatabase()
-const authenticator = new Authenticator()
-const userDatabase = new UserDatabase()
+import { CustomError } from './error/CustomError';
 
 export class CardBussiness {
-    insertCard = async(number: string, name: string, expiration: string, cvv: string, token: string) => {
-        if(!number){
-            throw new Error("The number input is empty")
-        } else if(number.length < 16) {
-            throw new Error("Your number must be contain 16 numbers")
-        }
-        if(!name){
-            throw new Error("The name input is empty")
-        }
-        if(!expiration){
-            throw new Error("The expiration input is empty || ex: YYYY/MM/DD")
-        }
-        if(!cvv){
-            throw new Error("The cvv input is empty")
-        }else if(cvv.length !== 3){
-            throw new Error("Your card cvv must have 3 numbers")
-        }
-        if(!token){
-            throw new Error("You have to login to create a card")
-        }
+    constructor(
+        private idGenerator: IdGenerator,
+        private hashManager: HashManager,
+        private cardDatabase: CardDatabase,
+        private authenticator: Authenticator,
+    ){}
 
-        const id = idGenerator.generateId()
-        const cypherCvv = await hashManager.hash(cvv)
+    public async insertCard(
+        number: string,
+        name: string, 
+        expiration: string, 
+        cvv: string, 
+        token: string
+        ){
+            try{
+                if(!number){
+                    throw new CustomError(422,"The number input is empty");
+                } else if(number.length < 16) {
+                    throw new CustomError(422,"Your number must be contain 16 numbers");
+                };
+                
+                if(!name){
+                    throw new CustomError(422,"The name input is empty");
+                };
+                
+                if(!expiration){
+                    throw new CustomError(422,"The expiration input is empty || ex: YYYY/MM/DD");
+                };
 
-        const getToken = authenticator.getTokenData(token)
+                if(!cvv){
+                    throw new CustomError(422,"The cvv input is empty");
+                }else if(cvv.length !== 3){
+                    throw new CustomError(422,"Your card cvv must have 3 numbers");
+                };
+                
+                if(!token){
+                    throw new CustomError(422,"You have to login to create a card");
+                };
+                
+                const id = this.idGenerator.generateId();
+                const cypherCvv = await this.hashManager.hash(cvv);
+                const getToken = this.authenticator.getTokenData(token);
+                const card = new Card(id, number, name, expiration, cypherCvv, getToken.id)
+                
+                await this.cardDatabase.createCard(card);
 
-        await cardDatabase.insertCard({
-            id: id,
-            number: number,
-            name: name,
-            expiration: expiration,
-            cvv: cypherCvv,
-            user_id: getToken.id
-        })
+            }catch(error: any){
+                throw new CustomError(error.statusCode, error.message)
+            }
     }
-}
+} 
+
+export default new CardBussiness(
+    new IdGenerator(),
+    new HashManager(),
+    new CardDatabase(),
+    new Authenticator()
+)

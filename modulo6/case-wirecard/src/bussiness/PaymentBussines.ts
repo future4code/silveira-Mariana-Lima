@@ -1,81 +1,99 @@
+import { UserDatabase } from './../data/UserDatabase';
+import { UserBussiness } from './UserBussiness';
 import { Authenticator } from './../services/Authenticator';
 import { CardDatabase } from '../data/CardDatabase';
 import { PaymentDatabase } from './../data/PaymentDatabase';
 import { IdGenerator } from './../services/IdGenerator';
-
-
-const idGenerator = new IdGenerator()
-const paymentDatabase = new PaymentDatabase()
-const cardDatabase = new CardDatabase()
-const authenticator = new Authenticator()
+import { CustomError } from './error/CustomError';
+import { CreditPayment, TicketPayment } from '../models/Payment';
 
 export class PaymentBussiness {
-    makeCreditPayment = async(amount: number, credit_card: string, token: string) => {
-        if(!amount){
-            throw new Error("The amount input is empty")
-        }
-        if(!credit_card){
-            throw new Error("The credit card input is empty")
-        }
-        if(!token){
-            throw new Error("The token input is empty")
-        } else if(token.length < 167){
-            throw new Error("Verify your authorization")
-        }
+    constructor(
+        private idGenerator: IdGenerator,
+        private authenticator: Authenticator,
+        private cardDatabase: CardDatabase,
+        private paymentDatabase: PaymentDatabase
+    ){}
 
-        const id = idGenerator.generateId()
-        const userId = authenticator.getTokenData(token)
-        const card = await cardDatabase.getCardById(credit_card)
+    public async makeCreditPayment(
+        amount: number, 
+        credit_card: string,
+        token: string
+        ){
+            try{
+                if(!amount){
+                    throw new CustomError(422,"The amount input is empty");
+                };
+                
+                if(!credit_card){
+                    throw new CustomError(422,"The credit card input is empty");
+                };
 
-        if(!card){
-            throw new Error("Incorrect card")
-        }
+                if(!token){
+                    throw new CustomError(422,"The token input is empty");
+                }else if(token.length < 167){
+                    throw new CustomError( 422,"Verify your authorization");
+                };
 
-        await paymentDatabase.makeCreditPayment({
-            id: id,
-            amount: amount,
-            payment: "Credit card",
-            credit_card: credit_card,
-            payment_situation: "Paid",
-            user_id: userId.id
-        })
-    }
+                const id = this.idGenerator.generateId();
+                const userId = this.authenticator.getTokenData(token);
+                const card = await this.cardDatabase.getCardById(credit_card);
+                
+                if(!card){
+                    throw new CustomError( 422,"Incorrect card")
+                }
 
-    makeTicketPayment = async(amount: number, token: string) => {
-        if(!amount){
-            throw new Error("The amount input is empty")
-        }
-        if(!token){
-            throw new Error("The token input is empty")
-        } else if(token.length < 167){
-            throw new Error("Verify your authorization")
-        }
+                const payment = new CreditPayment(id, amount, "Credit card", credit_card, "Paid", userId.id)
+                
+                await this.paymentDatabase.makeCreditPayment(payment);
+            }catch (error: any){
+                throw new CustomError(error.statusCode, error.message)
+            };                    
+    };
 
-        const userId = authenticator.getTokenData(token)
-        const id = idGenerator.generateId()
-        const ticketId = idGenerator.generateId()
+    public async makeTicketPayment(amount: number, token: string){
+        try{
+            if(!amount){
+                throw new CustomError(422,"The amount input is empty");
+            };
+            
+            if(!token){
+                throw new CustomError(422,"The token input is empty");
+            }else if(token.length < 167){
+            throw new CustomError(422,"Verify your authorization");
+            }
 
-        await paymentDatabase.makeTicketPayment({
-            id: id,
-            amount: amount,
-            payment: "Ticket",
-            payment_situation: "Waiting Payment",
-            id_tickert: ticketId,
-            user_id: userId.id
-        })
+            const userId = this.authenticator.getTokenData(token);
+            const id = this.idGenerator.generateId();
+            const ticketId = this.idGenerator.generateId();
+            const payment = new TicketPayment(id, amount, "Ticket", "Waiting Payment", ticketId, userId.id)
+
+        await this.paymentDatabase.makeTicketPayment(payment)
 
         return ticketId
-    }
-
-    getPayment = async(token: string) => {
+        
+        }catch (error: any){
+            throw new CustomError(error.statusCode, error.message)
+        };
+    };
+       
+    public getPaymentUserId = async(token: string) => {
         if(!token){
             throw new Error("The token input is empty")
         } else if(token.length < 167){
             throw new Error("Verify your authorization")
         }
 
-        const getTokenData = authenticator.getTokenData(token)
-        const result = await paymentDatabase.getPaymentUserId(getTokenData.id)
+        const getTokenData = this.authenticator.getTokenData(token)
+        const result = await this.paymentDatabase.getPaymentUserId(getTokenData.id)
         return result
     }
-}
+};
+
+export default new PaymentBussiness(
+    new IdGenerator(),
+    new Authenticator(),
+    new CardDatabase(),
+    new PaymentDatabase()
+)
+

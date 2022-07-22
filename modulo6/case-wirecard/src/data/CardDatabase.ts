@@ -1,29 +1,49 @@
+import { CustomError } from "../bussiness/error/CustomError";
 import { Card } from "../models/Card";
-import { BaseDatabse } from "./BaseDatabase";
+import BaseDatabase  from "./BaseDatabase";
 
 
-export class CardDatabase extends BaseDatabse {
-    insertCard = async(card: Card) => {
-        await this.connection("card_wirecard")
-        .insert({
-            id: card.id,
-            number: card.number,
-            name: card.name,
-            expiration: card.expiration,
-            cvv: card.cvv,
-            user_id: card.user_id
-        })
+export class CardDatabase extends BaseDatabase {
+
+    protected tableName: string = "card_wirecard";
+
+    private toModel(dbModel?: any): Card | undefined {
+        return(dbModel && new Card (
+            dbModel.id,
+            dbModel.number,
+            dbModel.name,
+            dbModel.expiration,
+            dbModel.cvv,
+            dbModel.user_id
+        ));
+    };
+
+    public async createCard(card: Card): Promise<void> {
+        try{
+            await BaseDatabase.connection.raw(`
+                INSERT INTO ${this.tableName} (id, number, name, expiration, cvv, user_id)
+                VALUES (
+                '${card.getId()}', 
+                '${card.getNumber()}', 
+                '${card.getName()}',
+                '${card.getExpiration()}',
+                '${card.getCVV()}',
+                '${card.getUserId()}'
+            )`
+        );
+        }catch (error: any) {
+            throw new Error(error.sqlMessage || error.message)
+        };
     }
 
-    getCardById = async(id: string) => {
-    const result = await this.connection("card_wirecard")
-    .select("*")
-    .where({id: id})
-    return {
-        id: result[0].id,
-        name: result[0].name,
-        email: result[0].email,
-        cpf: result[0].cpf,
-        password: result[0].password
+    public async getCardById(id: string): Promise<Card | undefined> {
+        try{
+            const result = await BaseDatabase.connection.raw(`
+                SELECT * from ${this.tableName} WHERE id = '${id}'
+            `);
+            return this.toModel(result[0][0]);
+        }catch(error: any){
+            throw new Error(error.sqlMessage || error.message)
+        }
     }
-}}
+}
