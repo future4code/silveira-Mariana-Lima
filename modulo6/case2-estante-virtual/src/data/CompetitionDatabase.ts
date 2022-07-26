@@ -1,7 +1,6 @@
 import { UpdateStatus } from './../model/UpdateStatus';
-import { Competition } from "../model/competition";
 import BaseDatabase from "./BaseDatabase";
-import { idText } from 'typescript';
+import { Competition } from '../model/Competition';
 
 export class CompetitionDatabase extends BaseDatabase {
     
@@ -20,9 +19,18 @@ export class CompetitionDatabase extends BaseDatabase {
         }
     };
 
-    public updateStatusCompetition = async (input: UpdateStatus): Promise<void> => {
+    public getCompetitionById = async(id:string): Promise<Competition> => {
         try{
-            const { id, status} = input;
+            const [result] = await BaseDatabase.connection(this.Table_Name)
+            .where("id", id)
+            return result;
+        } catch(error: any){
+            throw new Error( error.sqlMessage || error.message);
+        }
+    };
+
+    public updateStatusCompetition = async (id: string, status: string): Promise<void> => {
+        try{
             switch(status){
                 case "close":
                     await BaseDatabase.connection(this.Table_Name)
