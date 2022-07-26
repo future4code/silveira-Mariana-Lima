@@ -1,16 +1,16 @@
 import { CompetitionDatabase } from "../data/CompetitionDatabase";
 import { CustomError } from "../error/CustomError";
-import { Competition } from "../model/Competition";
+import { Competition } from "../model/competition";
 import { IdGenerator } from "../services/IdGenerator";
 
-export class competitionBusiness{
+export class CompetitionBusiness{
 
     constructor(
         private competitionDatabase: CompetitionDatabase,
         private idGenerator: IdGenerator
     ){}
 
-    public createCompetition = async(name: string, date: string, status: string): Promise<void> => {
+    public createCompetition = async(name: string, date: string): Promise<void> => {
         try{
             if(!name){
                 throw new CustomError(422, "The name input is empty");
@@ -18,10 +18,6 @@ export class competitionBusiness{
 
             if(!date){
                 throw new CustomError(422, "The date input is empty");
-            };
-
-            if(!status){
-                throw new CustomError(422, "The status input is empty");
             };
 
             const id = this.idGenerator.generateId();
@@ -44,7 +40,7 @@ export class competitionBusiness{
                 throw new CustomError(404, "Competition not found");
             }
 
-            await this.competitionDatabase.updateStatusCompetition(status)
+            await this.competitionDatabase.updateStatusCompetition(id, status)
         }catch(error: any) {
             throw new CustomError(error.statusCode, error.message);
         };

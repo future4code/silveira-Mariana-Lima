@@ -1,6 +1,5 @@
-import { Result } from "../model/Result";
+import { Result } from "../model/result";
 import BaseDatabase from "./BaseDatabase";
-
 
 export class ResultDatabase extends BaseDatabase {
 
