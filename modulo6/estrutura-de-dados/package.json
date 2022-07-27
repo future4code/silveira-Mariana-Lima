@@ -1,0 +1,20 @@
+{
+  "name": "estrutura-de-dados",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ex1": "ts-node-dev src/exercicio1.ts",
+      "ex2": "ts-node-dev src/exercicio2.ts",
+      "ex3": "ts-node-dev src/exercicio3.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
