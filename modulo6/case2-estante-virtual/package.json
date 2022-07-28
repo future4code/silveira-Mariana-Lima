@@ -1,7 +1,6 @@
 {
   "name": "case2-estante-virtual",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "migrations": "tsc && node ./build/migrations.js",
@@ -35,5 +34,6 @@
     "mysql": "^2.18.1",
     "ts-jest": "^28.0.7",
     "uuid": "^8.3.2"
-  }
+  },
+  "description": ""
 }

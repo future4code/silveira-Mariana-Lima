@@ -1,40 +1,42 @@
 import { Request, Response } from "express";
-import { CompetitionBusiness } from "../business/CompetitionBussines";
+import { CompetitionDTO } from "../types/DTO/CompetitionDTO";
+import { UpdateStatusDTO } from "../types/DTO/UpdateStatusDTO";
+import competitionBusiness from "../business/CompetitionBussines";
+
 
 export class CompetitionController {
-    constructor(
-        private competitionBusiness: CompetitionBusiness
-    ){}
+  
+  public async register(req: Request, res: Response): Promise<void> {
+    try {
+      const { name, date} = req.body;
+      const competitionInput: CompetitionDTO = {
+        name: name,
+        date: date,
+      };
 
-    public createCompetition = async(req: Request, res: Response): Promise<void> => {
-        try {
-            const { name, date } = req.body;
-            const result = await this.competitionBusiness.createCompetition(
-                name,
-                date,
-            );
-            
-            res.status(201).send({message: "Competition successfully created", result});
-        
-        }catch(error: any) {
-            const {statusCode, message } = error
-            res.status( statusCode || 400).send(error.sqlMessage || {message});
-        }  
-    };
+      await competitionBusiness.register(competitionInput)
 
-    public updateStatusCompetititon = async(req: Request, res: Response): Promise<void> => {
-        try{
-            const { id, status } = req.body;
-            const result = await this.competitionBusiness.updateStatusCompetititon(
-                id,
-                status
-            );
-
-            res.status(202).send({message: "Competition status update", result})
-        
-        }catch(error: any) {
-            const {statusCode, message } = error
-            res.status( statusCode || 400).send(error.sqlMessage || {message});
-        }
+      res.status(201).send({ message: "Competition created."});
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
     }
+  };
+
+  public async updateStatus (req: Request,res: Response): Promise<void> {
+    try {
+      const { id, status } = req.body;
+      const updateCompetitionInput: UpdateStatusDTO = {
+        id,
+        status,
+      };
+
+      await competitionBusiness.updateStatus(updateCompetitionInput);
+
+      res.status(202).send({ message: "Competition status updated."});
+    } catch (error: any) {
+      const { statusCode, message } = error;
+      res.status(statusCode || 400).send({ message });
+    }
+  };
 }

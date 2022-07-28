@@ -6,10 +6,7 @@ import { IdGenerator } from '../services/IdGenerator';
 
 export const CompetitionRouter = express.Router();
 
-const competitionController = new CompetitionController(
-    new CompetitionBusiness(
-        new CompetitionDatabase(), new IdGenerator()
-));
+const competitionController = new CompetitionController();
 
-CompetitionRouter.post("/create", competitionController.createCompetition);
-CompetitionRouter.patch("/status", competitionController.updateStatusCompetititon);
+CompetitionRouter.post("/create", competitionController.register);
+CompetitionRouter.patch("/status", competitionController.updateStatus);

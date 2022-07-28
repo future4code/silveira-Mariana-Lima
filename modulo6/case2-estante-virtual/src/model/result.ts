@@ -11,7 +11,7 @@ export class Result {
         return this.id
     };
 
-    public getCompettiton = () => {
+    public getCompetition = () => {
         return this.competition
     };
 

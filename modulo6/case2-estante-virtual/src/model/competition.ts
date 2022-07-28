@@ -3,7 +3,7 @@ export class Competition {
         private id: string,
         private name: string,
         private date: string,
-        private status: string 
+        private status: string
     ){}
 
     public getId = () => {
