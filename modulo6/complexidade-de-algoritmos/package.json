@@ -1,0 +1,16 @@
+{
+  "name": "complexidade-de-algoritmos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+    "scripts": {
+      "ex1": "ts-node-dev src/ex1.ts",
+      "ex2": "ts-node-dev src/ex2.ts",
+      "ex3": "ts-node-dev src/ex3.ts",
+      "ex4": "ts-node-dev src/ex4.ts",
+      "ex5": "ts-node-dev src/ex5.ts"  
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
