@@ -1,0 +1,61 @@
+### SIGNUP
+
+POST  http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Mariana Mendes",
+    "email": "MarianaMendes@dev.com",
+    "password": "123456789",
+    "cpf": "12345678914"
+}
+
+### LOGIN
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "maria@dev.com",
+    "password": "123456789"
+}
+
+### CREATE CARD
+
+POST http://localhost:3003/card/createCard
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmZGYwNWEyLTFlODMtNDEwMy1hYjI4LWQxYjlmMzg0NGQ4OCIsImlhdCI6MTY1ODUwMjE2MiwiZXhwIjoxNjU4NTA1NzYyfQ.DQXx1o9fF2gYhw9NQeOeq8cwoNhZXD87cirDvPJQd84
+Content-Type: application/json
+
+{
+    "number": "1234 5678 9012 1235", 
+    "name": "Maria Mendes",
+    "expiration": "2026/12/12", 
+    "cvv": "012"
+}
+
+### PAYMENT CARD
+
+POST http://localhost:3003/payment/creditPayment
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmZGYwNWEyLTFlODMtNDEwMy1hYjI4LWQxYjlmMzg0NGQ4OCIsImlhdCI6MTY1ODUwMjE2MiwiZXhwIjoxNjU4NTA1NzYyfQ.DQXx1o9fF2gYhw9NQeOeq8cwoNhZXD87cirDvPJQd84
+Content-Type: application/json
+
+{
+    "amount": 1000000,
+    "credit_card": "00c282ae-b95d-477e-9557-3069f73ed52d"
+}
+
+### PAYMENT TICKET
+
+POST http://localhost:3003/payment/ticketPayment
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmZGYwNWEyLTFlODMtNDEwMy1hYjI4LWQxYjlmMzg0NGQ4OCIsImlhdCI6MTY1ODUwMjE2MiwiZXhwIjoxNjU4NTA1NzYyfQ.DQXx1o9fF2gYhw9NQeOeq8cwoNhZXD87cirDvPJQd84
+Content-Type: application/json
+
+{
+    "amount": 290483
+}
+
+### GET PAYMENT
+
+GET  http://localhost:3003/users/payment?id=e0b7710a-6d3c-4055-8f20-be3c26b12fbb
+Authorization:   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg3ODNjYmE4LWFmODgtNGJkYy1iMmQ3LTk5MGI5MjM4MmU5NCIsImlhdCI6MTY1ODUwMjU4NCwiZXhwIjoxNjU4NTA2MTg0fQ.Ri9CXnCToRYfYJd4-TESg8D4_6vA_yIwwCUi_TNG-8k
+Content-Type: application/json
