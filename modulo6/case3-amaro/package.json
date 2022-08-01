@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migrations": "tsc && node ./build/migrations.js",
-    "start": "npm run build && node --inspect ./build/src/index.js",
+    "start": "node ./build/index.js",
     "dev": "ts-node-dev ./src/index.ts",
-    "build": "clear && echo \"Transpiling files...\" && tsc && echo \"Done!\" ",
+    "migrations": "tsnd ./src/data/migration/Migration.ts",  
+    "postinstall": "tsc",
     "test": "jest"
   },
   "keywords": [],
