@@ -1,8 +1,9 @@
-export class Product {
+export class Competition {
     constructor(
         private id: string,
         private name: string,
-        private tags: string
+        private date: string,
+        private status: string
     ){}
 
     public getId = () => {
@@ -13,7 +14,11 @@ export class Product {
         return this.name
     };
 
-    public getTags = () => {
-        return this.tags
+    public getDate = () => {
+        return this.date
     };
-}
+
+    public getStatus = () => {
+        return this.status
+    };
+};

@@ -1,7 +1,7 @@
-import { LoginIpuntDTO } from './../types/DTO/LoginInputDTO';
-import userBusiness  from './../business/UserBusiness';
-import { Request, Response } from "express";
-import { UserInputDTO } from "../types/DTO/UserInputDTO";
+import { LoginInputDTO } from './../types/DTO/LoginInputDTO';
+import { UserInputDTO } from './../types/DTO/UserInputDTO';
+import { Request, Response } from 'express';
+import userBusiness from './../business/UserBusiness';
 
 export class UserController {
 
@@ -11,8 +11,8 @@ export class UserController {
 
         try{
             const result = await userBusiness.signup(input);
-            
-            res.status(201).send("User successfully created");
+
+            res.status(201).send({ mesage: "User successfully created", token: result});
 
         } catch(error: any) {
             const {statusCode, message } = error
@@ -20,17 +20,15 @@ export class UserController {
         }   
     };
 
-    public async login(req: Request, res: Response) {
-        const { email, password } = req.body;
-        const input: LoginIpuntDTO = { email, password };
-
-        try{
-            const result = await userBusiness.login(input);
-
-            res.status(200).send(`Token: ${result}`)
-        }catch(error: any) {
+    public async login(req: Request, res: Response){
+        try {
+            const { email, password } = req.body
+            const input: LoginInputDTO = { email, password}
+            const response = await userBusiness.login(input)
+            res.status(200).send(`Token: ${response}`)
+        } catch(error: any) {
             const {statusCode, message } = error
             res.status( statusCode || 400).send(error.sqlMessage || {message});
-        }  
-    };
-}
+        }   
+    }
+} 

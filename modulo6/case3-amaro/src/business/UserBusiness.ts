@@ -1,24 +1,24 @@
-import { IdGenerator } from './../services/IdGeneratoe';
+import { LoginInputDTO } from './../types/DTO/LoginInputDTO';
+import { UserInputDTO } from './../types/DTO/UserInputDTO';
+import { Authenticator } from './../services/Authenticator';
 import { UserDatabase } from './../data/UserDatabase';
-import { Authenticator } from '../services/Authenticator';
-import { HashManager } from '../services/HashManager';
-import { UserInputDTO } from '../types/DTO/UserInputDTO';
-import { CustomError } from '../error/CustomError';
+import { HashManager } from "../services/HashManager";
 import { User } from '../model/User';
-import { LoginIpuntDTO } from '../types/DTO/LoginInputDTO';
+import { IdGenerator } from '../services/IdGeneratoe';
+import { CustomError } from '../error/CustomError';
 
-export class UserBusiness{
+export class UserBussiness {
     constructor(
-        private userDatabase: UserDatabase,
         private idGenerator: IdGenerator,
+        private hashManager: HashManager,
         private authenticator: Authenticator,
-        private hashManager: HashManager
+        private userDatabase: UserDatabase
     ){}
 
-    public async signup(input: UserInputDTO): Promise<void>{
+    public async signup(input: UserInputDTO): Promise<any>{
         try{
             const { name, email, password } = input;
-        
+
             if(!name) {
                 throw new CustomError(422,"The name input is empty");
             };
@@ -40,28 +40,31 @@ export class UserBusiness{
             const user = new User(id, name, email, cypherPassword)
 
             await this.userDatabase.insertUser(user)
+
+            const token = this.authenticator.generateToken({
+                id: user.getId()
+            });
+            return token;
         }catch (error: any){
             throw new CustomError(error.statusCode, error.message)
         };
-    };
+    };   
 
-    public async login(input: LoginIpuntDTO) {
+    public async login(input: LoginInputDTO){
         try{
-            const { email, password } = input;
 
+            const { email, password } = input;
+            
             if(!email){
                 throw new CustomError(422,"The email input is empty");
             } else if (email.indexOf("@") === -1){
                 throw new CustomError(422,"Your email needs an @");
             };
 
-            if(!password){
-                throw new CustomError(422, "The password input is empty");
-            };
+            const user = await this.userDatabase.selectUserByEmail(email);
 
-            const user = await this.userDatabase.getUserByEmail(email);
             if(!user){
-                throw new CustomError(404, "Invalid credentials");
+                throw new CustomError(401, "Invalid credentials");
             };
 
             const isPasswordCorrect = await this.hashManager.compare(
@@ -75,18 +78,16 @@ export class UserBusiness{
             const token = this.authenticator.generateToken({
                 id: user.getId()
             });
-            
             return token;
-
-        }catch (error: any){
-                throw new CustomError(error.statusCode, error.message)
-            };
+        } catch (error: any){
+            throw new CustomError(error.statusCode, error.message)
         };
     };
-    
-export default new UserBusiness(
-    new UserDatabase(),
+}
+
+export default new UserBussiness(
     new IdGenerator(),
+    new HashManager(),
     new Authenticator(),
-    new HashManager()
-)
+    new UserDatabase()
+) 

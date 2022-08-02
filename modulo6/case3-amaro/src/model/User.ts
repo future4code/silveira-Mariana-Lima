@@ -1,24 +1,25 @@
-export class User {
+export class User  {
     constructor(
         private id: string,
         private name: string,
         private email: string,
-        private password: string
+        private password: string  
     ){}
 
-    public getId = () => {
-        return this.id
+    public getId(): string{
+        return this.id;
     };
 
-    public getName = () => {
-        return this.name
+    public getName(): string{
+        return this.name;
     };
 
-    public getEmail = () => {
-        return this.email
+    public getEmail(): string{
+        return this.email;
     };
 
-    public getPassword = () => {
-        return this.password
+    public getPassword(): string{
+        return this.password;
     };
-}
+
+} 

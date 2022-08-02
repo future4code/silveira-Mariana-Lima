@@ -1,5 +1,5 @@
 export interface ProductInputDTO{
-    id: string;
     name: string,
-    tags: string
+    tags: string,
+    token: string
 }
