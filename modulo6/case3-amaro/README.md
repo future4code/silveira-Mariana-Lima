@@ -7,7 +7,7 @@
 <a href="#desenvolvedora">Desenvolvedora</a>
 </p>
 
-<h1 id="sobre">📕 Case 2 - Estante Virtual </h1>
+<h1 id="sobre">📕 Case 3 - Amaro </h1>
 
 <p>Criação de API para cadastro e consulta de produtos</p>
 
