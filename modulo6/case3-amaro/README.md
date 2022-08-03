@@ -9,41 +9,36 @@
 
 <h1 id="sobre">📕 Case 2 - Estante Virtual </h1>
 
-<p>Com a chegada dos jogos olímpicos, fomos designados para construir uma API REST em Ruby para o COB (Comitê Olímico Brasileiro), que será responsável por marcar e dizer os vencedores das seguintes modalidades:
-
-100m rasos: Menor tempo vence
-Lançamento de Dardo: Maior distância vence</p>
+<p>Criação de API para cadastro e consulta de produtos</p>
 
 <h2 id="orientacoes">🚨 Orientações para acesso</h2>
 
-- Realizar cadastro de uma competição com nome da competição e data da competição. Sempre que criado a competição vai está aberta;
-- Modificar o status da competição para aberto e fechado, caso esteja fechado, não poderá realizar o cadastro de resultado do atleta;
-- Realizar o cadastro com nome da competição, nome do atleta, valor obtido e unidade da competição ("s": por segundos e "m": por metros);
-- Realizar a visualização do ranking por segundo ou metros com o nome da competição.
+- Realizar o login se já possui um cadastro retorna token de autorização;
+- Realizar o cadastro com nome, email e senha.
+- Realizar o cadastro de produto com nome ddo produto e tags relacionadas ao produto.
+- Visualizar o produto passando id, nome ou tags.
 
 <h2 id="documentação">🚨 Documentação do Postman</h2>
 
-- [Postman](https://documenter.getpostman.com/view/20351771/Uzds1oFv)
-- [Deploy Heroku](https://case-estante-virtual-mariana.herokuapp.com/)
+- [Postman](https://documenter.getpostman.com/view/20351771/Uzs42Qf4)
+- [Deploy Heroku](https://case-amaro-mariana.herokuapp.com/)
 
 <h2 id="features">✔️ Features</h2>
 
-🏆 Cadastro Competição
+👤 Cadastro/Login
 
-- [x] Para o cadastro da competição, deve fornecer o nome da competição e a data da realização do campeonato.
+- [x] Para o cadastro nessa rede social, o usuário deve fornecer seu nome, seu e-mail e uma senha.
 
-🔄 Modificar Status da Competição
+- [x] Para realizar o login, basta informar seu e-mail e a sua senha. O retorno deve conter o token de autenticação do usuário.
+ 
 
-- [x] Para realizar a modificação do status, basta informar id e seu novo status no body.
+🛒 Cadastro de Produto
 
-🥇 Criar Resultado
-- [x] Para o cadastro  do resultado, deve fornecer o nome da competição, nome do atleta, valor e unidade de tempo("s") ou distancia ("m").
+- [x] Para realizar o cadastro, basta informar nome e tags do produto.
 
-🏃‍♂️ Ranking de Segundos 
-- [x] Informe o nome da competição e vai retorna o ranking da competição.
+🛒 Vizualizar o Produto
+- [x] Para visualizar o produto basta informar id, nome ou tags .
 
-🪕 Ranking de Metros
-- [x] Informe o nome da competição e vai retorna o ranking da competição.
 
  <h2 id="tecnologia">🛠 Tecnologia</h2>
 
