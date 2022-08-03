@@ -12,9 +12,10 @@ export class ProductController {
 
         try {
             
-            const response = await productBusiness.insertProduct(input)
+            const response = await productBusiness.insertProduct(input);
 
-            res.send("The product was successfully created")
+            res.send("The product was successfully created");
+
         } catch (error: any) {
             const { statusCode, message } = error;
             res.status(statusCode || 400).send({ message });
@@ -23,11 +24,11 @@ export class ProductController {
 
     getProduct = async (req: Request, res: Response) => {
         try {
-            const {search} = req.params as any
-            const token = req.headers.authorization as string
-            const response = await productBusiness.getProduct(search, token)
+            const {search} = req.params as any;
+            const token = req.headers.authorization as string;
+            const response = await productBusiness.getProduct(search, token);
 
-            res.send(response)
+            res.status(200).send(response);
 
         } catch (error: any) {
             const { statusCode, message } = error;

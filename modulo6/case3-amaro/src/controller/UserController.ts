@@ -22,13 +22,15 @@ export class UserController {
 
     public async login(req: Request, res: Response){
         try {
-            const { email, password } = req.body
-            const input: LoginInputDTO = { email, password}
-            const response = await userBusiness.login(input)
-            res.status(200).send(`Token: ${response}`)
+            const { email, password } = req.body;
+            const input: LoginInputDTO = { email, password};
+            const response = await userBusiness.login(input);
+
+            res.status(200).send(`Token: ${response}`);
+
         } catch(error: any) {
             const {statusCode, message } = error
             res.status( statusCode || 400).send(error.sqlMessage || {message});
         }   
-    }
+    };
 } 

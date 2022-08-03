@@ -24,12 +24,12 @@ export class ProductBusiness {
 
             if(!token) {
                 throw new Error("Verify you authorization")
-            }
+            };
 
             const id = this.idGenerator.generateId();
             const product = new Product(id, name, tags);
 
-            await this.productDatabase.insertProduct(product)
+            await this.productDatabase.insertProduct(product);
 
         }catch (error: any){
             throw new CustomError(error.statusCode, error.message)
@@ -40,14 +40,14 @@ export class ProductBusiness {
         try{
             if(!search) {
             this.productDatabase.getAllProducts
-        }
+        };
         if(!token) {
             throw new Error("Verify you authorization")
-        }
+        };
 
-        const result =  await this.productDatabase.getProduct(search)
+        const result =  await this.productDatabase.getProduct(search);
         
-        return result
+        return result;
 
         }catch (error: any){
             throw new CustomError(error.statusCode, error.message)

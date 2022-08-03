@@ -45,7 +45,7 @@ export class ProductDatabase extends BaseDatabase {
     public async getAllProducts() {
         try {
             const result = await BaseDatabase.connection(this.TABLE_NAME)
-            return this.toModel(result)
+            return this.toModel(result);
         }catch(error: any) {
             throw new Error(error.message)
         }
@@ -56,7 +56,7 @@ export class ProductDatabase extends BaseDatabase {
             const result = await BaseDatabase.connection(this.TABLE_NAME)
             .select("*")
             .where("id", id )
-            return this.toModel(result[0][0])
+            return this.toModel(result[0][0]);
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message);
           }

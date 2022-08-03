@@ -37,9 +37,9 @@ export class UserBussiness {
 
             const id = this.idGenerator.generateId();
             const cypherPassword = await this.hashManager.hash(password);
-            const user = new User(id, name, email, cypherPassword)
+            const user = new User(id, name, email, cypherPassword);
 
-            await this.userDatabase.insertUser(user)
+            await this.userDatabase.insertUser(user);
 
             const token = this.authenticator.generateToken({
                 id: user.getId()
