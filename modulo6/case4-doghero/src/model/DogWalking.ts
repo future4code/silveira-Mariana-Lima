@@ -48,13 +48,40 @@ export class DogWalking {
     public getEndDate = () => {
         return this.end_date
     };
+
+    static StatusRole(input: string): STATUS_ROLES{
+        switch (input) {
+            case "Do":
+                return STATUS_ROLES.DO;
+            case "DO":
+                return STATUS_ROLES.DO;
+            case "do":
+                return STATUS_ROLES.DO;
+            case "Doing":
+                return STATUS_ROLES.DOING;
+            case "doing":
+                return STATUS_ROLES.DOING;
+            case "DOING":
+                return STATUS_ROLES.DOING;
+            case "Done":
+                return STATUS_ROLES.DONE;
+            case "done":
+                return STATUS_ROLES.DONE;
+            case "DONE":
+                return STATUS_ROLES.DONE;
+            default:
+            throw new Error("Invalid status");
+        }
+    }
 };
 
 export enum STATUS_ROLES {
     DO = "Do",
     DOING = "Doing",
     DONE = "Done"
- }
+ };
+
+ 
 
 export const PriceCalculator =(duration: string, pets: number):number => {
     switch (duration) {
@@ -65,4 +92,4 @@ export const PriceCalculator =(duration: string, pets: number):number => {
         default:
             throw new CustomError (422, "Fill in the time with the options of 30 or 60 minutes.")
     }
-}
+};
