@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev ./src/exercise1.ts",
+    "dev": "ts-node-dev ./src/NúmeroFaltante/exercise1.ts",
+    "dev1": "ts-node-dev ./src/ChecaParêntesesVálidos/exercise1.ts",
     "start": "tsc && node ./build/exercise1.js",
     "test": "jest"
   },
