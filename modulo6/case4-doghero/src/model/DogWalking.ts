@@ -3,12 +3,12 @@ import { CustomError } from "../error/CustomError";
 export class DogWalking {
     constructor(
         private id: string,
-        private status: string,
-        private date: Date,
+        private status: STATUS_ROLES,
+        private date: string,
         private price: number,
+        private duration: number,
         private latitude: number,
         private longitude: number,
-        private duration: string,
         private start_date: string,
         private end_date: string
     ){}
@@ -79,17 +79,15 @@ export enum STATUS_ROLES {
     DO = "Do",
     DOING = "Doing",
     DONE = "Done"
- };
-
- 
-
-export const PriceCalculator =(duration: string, pets: number):number => {
-    switch (duration) {
-        case "30":
-            return 25 + (pets - 1)* 15 ;
-        case "60":
-            return 35 + (pets - 1)* 15;
-        default:
-            throw new CustomError (422, "Fill in the time with the options of 30 or 60 minutes.")
-    }
 };
+
+// export const PriceCalculator =(duration: string, pets: number):number => {
+//     switch (duration) {
+//         case "30":
+//             return 25 + (pets - 1)* 15 ;
+//         case "60":
+//             return 35 + (pets - 1)* 15;
+//         default:
+//             throw new CustomError (422, "Fill in the time with the options of 30 or 60 minutes.")
+//     }
+// };

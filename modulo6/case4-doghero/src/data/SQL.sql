@@ -1,23 +1,30 @@
 -- Active: 1656509809949@@35.226.146.116@3306@silveira-21814389-mariana-lima
-CREATE TABLE IF NOT EXISTS dogWalking_doghero(
-          id VARCHAR(255) PRIMARY KEY,
-          status ENUM("Do", "Doing", "Done") DEFAULT "Do",
-          date DATE NOT NULL,
-          price FLOAT NOT NULL,
-          latitude VARCHAR(255) NOT NULL,
-          longitude VARCHAR(255) NOT NULL,
-          duration ENUM("30", "60") NOT NULL,
-          start_date timestamp NOT NULL,
-          end_date timestamp NOT NULL
+CREATE TABLE doghero_dogWalking(
+        id VARCHAR(255) PRIMARY KEY NOT NULL,
+        status ENUM("Do", "Doing", "Done") DEFAULT "Do",
+        date DATE NOT NULL,
+        price INT NOT NULL,
+        duration INT NOT NULL,
+        latitude INT NOT NULL,
+        longitude INT NOT NULL,
+        start_time TIME NOT NULL,
+        end_time TIME NOT NULL
       );
 
-SELECT * FROM dogWalking_doghero;
+SELECT * FROM doghero_dogWalking;
 
-CREATE TABLE IF NOT EXISTS pets_doghero(
-        id VARCHAR(255) PRIMARY KEY,
-        pet_name VARCHAR(255) NOT NULL,
-        pet_walk_id VARCHAR(255) NOT NULL,
-        FOREIGN KEY (pet_walk_id) REFERENCES dogWalking_doghero(id)
+CREATE TABLE doghero_pets(
+        id VARCHAR(255) PRIMARY KEY NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        tutor VARCHAR(255) NOT NULL
 );
 
-SELECT * FROM Pets;
+SELECT * FROM doghero_pets;
+
+CREATE TABLE doghero_pets_tour(
+        id VARCHAR(255) PRIMARY KEY NOT NULL,
+        pet_id VARCHAR(255) NOT NULL,
+        FOREIGN KEY (pet_id) REFERENCES doghero_pets (id),
+        tour_id VARCHAR(255) NOT NULL,
+        FOREIGN KEY (tour_id) REFERENCES doghero_dogWalking (id)
+)

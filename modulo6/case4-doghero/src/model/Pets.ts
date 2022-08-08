@@ -1,19 +1,19 @@
 export class Pets {
     constructor(
         private id: string,
-        private pet_name: string,
-        private pet_walk_id: string
+        private name: string,
+        private tutor: string
     ){}
 
     public getId = () => {
         return this.id
     };
 
-    public getPetName = () => {
-        return this.pet_name
+    public getName = () => {
+        return this.name
     };
 
-    public getPetWalkId = () => {
-        return this.pet_walk_id
+    public getTutor = () => {
+        return this.tutor
     };
 }
