@@ -8,6 +8,6 @@ export type DogWalkingResult = {
     duration: number,
     latitude: number,
     longitude: number,
-    start_date: string,
-    end_date: string
+    start_time: string,
+    end_time: string
 }

@@ -1,5 +1,5 @@
 export type PetResult = {
     id: string,
-    nome: string,
+    name: string,
     tutor: string
 };

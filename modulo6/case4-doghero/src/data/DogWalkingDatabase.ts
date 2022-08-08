@@ -37,8 +37,8 @@ export class DogWalkingDatabase extends BaseDatabase{
                 latitude: walking.getLatitude(),
                 longitude: walking.getLongitude(),
                 duration: walking.getDuration(),
-                start_date: walking.getStartDate(),
-                end_date: walking.getEndDate()
+                start_time: walking.getStartTime(),
+                end_time: walking.getEndTime()
             });
         }catch (error: any) {
             throw new Error(error.sqlMessage || error.message)
@@ -132,7 +132,7 @@ export class DogWalkingDatabase extends BaseDatabase{
     public async startTime(id: string, startTime: string): Promise<DogWalkingResult> {
         try {
             const result = await BaseDatabase.connection(this.TABLE_WALKING)
-                .update({start_date: startTime, status: "DO"})
+                .update({start_time: startTime, status: "DO"})
                 .where("id",id)
 
             const updatedWalk = await BaseDatabase.connection(this.TABLE_WALKING)
@@ -149,7 +149,7 @@ export class DogWalkingDatabase extends BaseDatabase{
     public async finishWalking (id: string, finishTime: string, newPrice: number, duration: string): Promise<DogWalkingResult> {
         try {
             const result = await BaseDatabase.connection(this.TABLE_WALKING)
-                .update({status: "DONE", preco: newPrice, duracao: duration, hora_fim: finishTime})
+                .update({status: "DONE", price: newPrice, duration: duration, end_time: finishTime})
                 .where("id", id)
 
             const updatedWalk = await BaseDatabase.connection(this.TABLE_WALKING)

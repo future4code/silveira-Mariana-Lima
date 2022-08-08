@@ -9,8 +9,8 @@ export class DogWalking {
         private duration: number,
         private latitude: number,
         private longitude: number,
-        private start_date: string,
-        private end_date: string
+        private start_time: string,
+        private end_time: string
     ){}
 
     public getId = () => {
@@ -41,12 +41,12 @@ export class DogWalking {
         return this.duration
     };
 
-    public getStartDate = () => {
-        return this.start_date
+    public getStartTime = () => {
+        return this.start_time
     };
 
-    public getEndDate = () => {
-        return this.end_date
+    public getEndTime = () => {
+        return this.end_time
     };
 
     static StatusRole(input: string): STATUS_ROLES{
