@@ -10,6 +10,7 @@
     "maior": "ts-node-dev ./src/MaiorPrefixoComum/exercise1.ts",
     "solitario": "ts-node-dev ./src/ONumeroSolitario/exercise1.ts",
     "anagrama": "ts-node-dev ./src/Anagrama/exercise1.ts",
+    "soma": "ts-node-dev ./src/SomaDeDois/exercise1.ts",
     "start": "tsc && node ./build/exercise1.js",
     "test": "jest"
   },
