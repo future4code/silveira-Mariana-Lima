@@ -52,7 +52,7 @@ export class DogWalking {
 
     public getPets = () => {
         return this.pets
-    }
+    };
 
 //     static StatusRole(input: string): STATUS_ROLES{
 //         switch (input) {

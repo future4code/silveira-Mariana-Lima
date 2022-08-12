@@ -1,3 +1,4 @@
+import { UpdateStatusDTO } from './../types/DTO/UpdateStatusDto';
 import { DogWalking } from "../model/DogWalking";
 import BaseDatabase from "./BaseDatabase";
 
@@ -50,6 +51,61 @@ export class DogWalkingDatabase extends BaseDatabase{
             return result
         }catch (error: any) {
             throw new Error(error.sqlMessage || error.message)
+        }
+    };
+
+    public async updateStatus(input: UpdateStatusDTO): Promise<void>{
+        try{
+            const {id, status} = input; 
+            switch (status) {
+                case "do":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("staus", "do")
+                        .where("id", id);
+                break;
+                case "DO":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("staus", "DO")
+                        .where("id", id);
+                break;
+                case "Do":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("staus", "Do")
+                        .where("id", id);
+                break;
+                case "doing":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status", "doing")
+                        .where("id", id)
+                break;
+                case "DOING":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status", "DOING")
+                        .where("id", id)
+                break;
+                case "Doing":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status", "Doing")
+                        .where("id", id)
+                break;
+                case "done":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status", "done")
+                        .where("id", id)
+                break;
+                case "DONE":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status",  "DONE")
+                        .where("id", id)
+                break;
+                case "Done":
+                    await BaseDatabase.connection(this.TABLE_NAME)
+                        .update("status", "Done")
+                        .where("id", id)
+                break;
+            }
+        } catch(error: any){
+            throw new Error(error.sqlMessage || error.message);
         }
     };
 };

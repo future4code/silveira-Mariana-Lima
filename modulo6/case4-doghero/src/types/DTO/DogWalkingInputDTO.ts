@@ -6,6 +6,7 @@ export interface DogWalkingInputDTO {
     pets: number,
     start_time: string,
     end_time: string,
+    token: string
 };
 
 export interface DogWalkingInputMockDTO {
@@ -17,4 +18,5 @@ export interface DogWalkingInputMockDTO {
     pets: number,
     start_time: string,
     end_time: string,
+    token: string
 };

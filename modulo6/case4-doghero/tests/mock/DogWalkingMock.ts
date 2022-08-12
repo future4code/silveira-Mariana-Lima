@@ -9,4 +9,5 @@ export const DogWalkingMock: DogWalkingInputMockDTO = {
     pets: 2,
     start_time: "10:00",
     end_time: "10:30",
+    token: "token"
 }

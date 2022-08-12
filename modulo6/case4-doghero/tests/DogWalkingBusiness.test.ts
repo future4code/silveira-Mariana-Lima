@@ -21,6 +21,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -43,6 +44,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -65,6 +67,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -87,6 +90,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -109,6 +113,7 @@ describe("Walking Tests", () => {
                 pets: 0,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -131,6 +136,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
@@ -153,12 +159,36 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
         }catch (error) {
             if (error instanceof CustomError) {
               expect(error.message).toEqual("The end date input is empty");
+              expect(error.statusCode).toEqual(422);
+            }
+        }
+    });
+
+    test("Token field is empty", async () => {
+        try{
+            const inputMock: DogWalkingInputMockDTO = {
+                id: "id_d",
+                date: "12/08/2022",
+                duration: "30",
+                latitude: 12.34567,
+                longitude: 12.34567,
+                pets: 2,
+                start_time: "10:00",
+                end_time: "10:30",
+                token: "token"
+            };
+
+            await dogWalkingBusinessMock.insertWalking(inputMock)
+        }catch (error) {
+            if (error instanceof CustomError) {
+              expect(error.message).toEqual("Verify you authorization");            
               expect(error.statusCode).toEqual(422);
             }
         }
@@ -175,6 +205,7 @@ describe("Walking Tests", () => {
                 pets: 2,
                 start_time: "10:00",
                 end_time: "10:30",
+                token: "token"
             };
 
             await dogWalkingBusinessMock.insertWalking(inputMock)
